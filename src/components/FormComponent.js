@@ -1,53 +1,49 @@
+import React from "react";
+import { Button, Container } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import "../App.css";
+
+let initialFormDataObject = {
+  taskName: "",
+  hour: "",
+  type: "",
+};
 
 const FormComponent = ({ getFormData }) => {
-  const initial = {
-    taskName: "",
-    hour: "",
-    type: "good",
-  };
-  const [formVal, setFormVal] = useState(initial);
+  const [formDataObject, setFormDataObject] = useState(initialFormDataObject);
+
   const handleOnChange = (e) => {
     const { value, name } = e.target;
-    // Stil confuse how this work.
-    setFormVal({ ...formVal, [name]: value });
+    setFormDataObject({ ...formDataObject, [name]: value });
   };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    getFormData({ ...formVal, id: uuidv4() });
+    getFormData(formDataObject);
   };
+
   return (
-    <Form className="mt-5 text-center" onSubmit={handleOnSubmit}>
+    <Form className="text-center mt-5" onSubmit={handleOnSubmit}>
       <Row>
-        <Col md="7">
+        <Col md="6">
           <Form.Control
-            name="taskName"
+            placeholder="Task Name"
             onChange={handleOnChange}
-            required
             name="taskName"
-            placeholder="First name"
           />
         </Col>
         <Col>
           <Form.Control
-            name="hour"
-            onChange={handleOnChange}
-            type="number"
-            required
-            name="hour"
             placeholder="Hours"
+            onChange={handleOnChange}
+            name="hour"
           />
         </Col>
         <Col>
-          <Button type="submit" variant="primary">
-            Add Task
-          </Button>
+          <Button type="submit">Submit</Button>
         </Col>
       </Row>
     </Form>

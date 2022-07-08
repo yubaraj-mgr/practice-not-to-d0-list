@@ -1,66 +1,49 @@
+import React from "react";
 import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
 import { Form } from "react-bootstrap";
-
-const GoodListBadList = ({ type, dataArray, switchData, handleOnCheck }) => {
+const GoodListBadList = ({ type, formDataArray }) => {
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>
-            <Form.Check type="checkbox" onChange={handleOnCheck} />
-          </th>
-          <th>Task Name</th>
-          <th>Hours</th>
-          <th>Move</th>
-        </tr>
-      </thead>
-      <tbody>
-        {type === "good"
-          ? dataArray.map((item, i) => {
-              return (
-                <>
-                  <tr>
-                    <td>
-                      <Form.Check type="checkbox" onChange={handleOnCheck} />
-                    </td>
-                    <td>{item.taskName}</td>
-                    <td>{item.hour}</td>
-                    <td>
-                      <Button
-                        variant="warning"
-                        onClick={() => switchData(item.id, "bad")}
-                      >
-                        <i className="fa-solid fa-arrow-right"></i>
-                      </Button>
-                    </td>
-                  </tr>
-                </>
-              );
-            })
-          : dataArray.map((item, i) => {
-              return (
-                <>
-                  <tr>
-                    <td>
-                      <Form.Check type="checkbox" onChange={handleOnCheck} />
-                    </td>
-                    <td>{item.taskName}</td>
-                    <td>{item.hour}</td>
-                    <td>
-                      <Button
-                        variant="warning"
-                        onClick={() => switchData(item.id, "good")}
-                      >
-                        <i className="fa-solid fa-arrow-left"></i>
-                      </Button>
-                    </td>
-                  </tr>
-                </>
-              );
-            })}
-      </tbody>
-    </Table>
+    <>
+      <Table striped bordered hover className="mt-5">
+        <thead>
+          <tr>
+            <th>
+              <Form.Check type="checkbox" />
+            </th>
+            <th>Task</th>
+            <th>Hour</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {formDataArray.map((item, index) => {
+            return type == "entryList" ? (
+              <tr>
+                <td>
+                  <Form.Check type="checkbox" />
+                </td>
+                <td>{item.taskName}</td>
+                <td>{item.hour}</td>
+                <td>
+                  <i className="fa-solid fa-arrow-right text-success"></i>
+                </td>
+              </tr>
+            ) : (
+              <tr>
+                <td>
+                  <Form.Check type="checkbox" />
+                </td>
+                <td>Yubaraj</td>
+                <td>Magar</td>
+                <td>
+                  <i className="fa-solid fa-arrow-right text-success"></i>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>
+    </>
   );
 };
 
